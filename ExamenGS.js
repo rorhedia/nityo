@@ -8,41 +8,35 @@
  */
 
 function mostCommonWord( parrafo, palabrasNoPermitidas ) {
-    parrafo = parrafo.replace( /\.|\,/g, ' ' ).trim();
-    let arrayDePalabras = parrafo.split( ' ' );
+    let palabras = parrafo.replace( /\.|\,/g, ' ' ).split( ' ' );
     let obj = {}
 
-    let palabrasParrafo = arrayDePalabras.filter( palabra => {
-        if ( palabra !== '' && !palabrasNoPermitidas.includes( palabra ) ) {
-            return palabra.toUpperCase();
-        }
+    palabrasNoPermitidas = palabrasNoPermitidas.map( palabra => palabra.toLowerCase() );
+    palabras = palabras
+        .map( palabra => palabra.toLowerCase() )
+        .filter( palabra => palabra !== '' && !palabrasNoPermitidas.includes( palabra ) );
+
+    palabras.forEach( ( palabra ) => {
+        obj.hasOwnProperty( palabra ) ? obj[palabra]++ : obj[palabra] = 1;
     } );
 
-    for ( let i = 0; i < palabrasParrafo.length; i++ ) {
-        let palabra = palabrasParrafo[i].toLowerCase();
-        obj[palabra] = 1;
-        for ( j = 0; j < palabrasParrafo.length; j++ ) {
-            let palabra2 = palabrasParrafo[j].toLowerCase();
-            if ( i !== j ) {
-                if ( palabra == palabra2 ) {
-                    obj[palabra]++;
-                }
-            }
+    let max = 0;
+    let val = '';
+    for ( const key in obj ) {
+        if ( obj[key] > max ) {
+            max = obj[key];
+            val = key;
         }
     }
 
-    let mayor = Object.entries( obj ).reduce( ( prev, curr ) => {
-        return prev[1] > curr[1] ? prev : curr;
-    } );
-
-    return mayor;
+    return `La palabra más repetida es '${val}' con ${max} apariciones.`;
 }
 
 function main() {
     const parrafo = "Bob hit a ball, the hit BALL flew long after it was hit.";
     const palabrasNoPermitidas = [ "hit" ];
     const parrafo2 = 'a, a, a, a, b,b,b,c, c';
-    const palabrasNoPermitidas2 = [ 'a', ]
+    const palabrasNoPermitidas2 = [ 'a' ]
 
     const result = mostCommonWord( parrafo, palabrasNoPermitidas );
     console.log( result + '\n--------------' );

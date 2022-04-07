@@ -1,8 +1,8 @@
 const mongoose = require( 'mongoose' );
 
-const StoreScheme = new mongoose.Schema( {
-    categoria:         { type: String },
-    direccion:         { type: String },
+const StoresScheme = new mongoose.Schema( {
+    categoria:         { type: Object },
+    direccion:         { type: Object },
     nombrePropietario: { type: String },
     nombreTienda:      { type: String },
     fechaHoraAlta:     { type: String }
@@ -11,4 +11,4 @@ const StoreScheme = new mongoose.Schema( {
     versionKey: false
 } );
 
-module.exports = mongoose.model( 'stores', StoreScheme );
+module.exports = mongoose.model( 'stores', StoresScheme );
