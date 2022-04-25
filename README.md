@@ -26,6 +26,8 @@ PUT http://localhost:3000/api/v1/users/update/:id
 "especialidad": "Base de datos"
 }
 
+### NOTA: Importar Nityo.postman_collection.json a postman para pruebas
+
 ## Ejecutar ExamenGC.js
 ```bash
 npm run gstest

@@ -17,9 +17,7 @@ const test = async ( req, res ) => {
  */
 const getAll = async ( req, res ) => {
     try {
-        console.log( req.headers );
         const result = await userModel.find();
-        console.log( { result } );
         res.status( 200 ).json( { data: result } )
     } catch ( e ) {
         httpErrors( res, e );
